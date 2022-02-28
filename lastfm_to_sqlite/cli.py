@@ -84,7 +84,7 @@ def plays(database, auth, since, since_date):
 
     db = sqlite_utils.Database(database)
 
-    if since and db["plays"].exists:
+    if since and db["plays"].exists():
         since_date = db.conn.execute("select max(timestamp) from plays").fetchone()[0]
     if since_date:
         since_date = dateutil.parser.parse(since_date)
@@ -109,3 +109,5 @@ def plays(database, auth, since, since_date):
             lastfm.save_album(db, track["album"])
             lastfm.save_track(db, track["track"])
             lastfm.save_play(db, track["play"])
+
+    db.index_foreign_keys()

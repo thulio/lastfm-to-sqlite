@@ -92,20 +92,36 @@ def get_network(name: str, key: str, secret: str):
 
 
 def save_artist(db: Database, data: Dict):
-    db["artists"].upsert(data, pk="id", column_order=["id", "name"], not_null=["name"])
+    db["artists"].upsert(
+        data,
+        pk="id",
+        column_order=["id", "name"],
+        alter=True,
+    )
 
 
 def save_album(db: Database, data: Dict):
     db["albums"].upsert(
-        data, pk="id", foreign_keys=["artist_id"], not_null=["id", "artist_id", "title"]
+        data,
+        pk="id",
+        foreign_keys=["artist_id"],
+        alter=True,
     )
 
 
 def save_track(db: Database, data: Dict):
     db["tracks"].upsert(
-        data, pk="id", foreign_keys=["album_id"], not_null=["id", "album_id", "title"]
+        data,
+        pk="id",
+        foreign_keys=["album_id"],
+        alter=True,
     )
 
 
 def save_play(db: Database, data: Dict):
-    db["plays"].upsert(data, pk=["timestamp", "track_id"], foreign_keys=["track_id"])
+    db["plays"].upsert(
+        data,
+        pk=["timestamp", "track_id"],
+        foreign_keys=["track_id"],
+        alter=True,
+    )

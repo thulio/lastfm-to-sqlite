@@ -11,7 +11,7 @@ repository = "https://github.com/jacobian/lastfm-to-sqlite/"
 lastfm-to-sqlite = "lastfm_to_sqlite.cli:cli"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.8"
 pylast = "*"
 sqlite-utils = "*"
 click = "*"
